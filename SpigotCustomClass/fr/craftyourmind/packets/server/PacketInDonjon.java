@@ -1,59 +1,54 @@
-/*
- * Decompiled with CFR 0_114.
- */
 package fr.craftyourmind.packets.server;
 
-import io.netty.buffer.ByteBuf;
 import java.io.IOException;
-import net.minecraft.server.v1_9_R2.Packet;
-import net.minecraft.server.v1_9_R2.PacketDataSerializer;
-import net.minecraft.server.v1_9_R2.PacketListener;
 
-public class PacketInDonjon
-implements Packet<PacketListener> {
-    public static final String DELIMITER = "";
-    public static final int WORLD = 0;
-    public int action;
-    public String names;
-    public int playerNb;
+import net.minecraft.server.Packet;
+import net.minecraft.server.PacketDataSerializer;
+import net.minecraft.server.PacketListener;
 
-    public PacketInDonjon() {
-    }
+public class PacketInDonjon implements Packet{
+	public final static String DELIMITER = "";
+	
+	public final static int WORLD = 0;
+	
+	public int action;
+	public String names;
+	public int playerNb;
 
-    public PacketInDonjon(int action, String names, int playerNb) {
-        this.action = action;
-        this.names = names;
-        this.playerNb = playerNb;
-    }
-
-    @Override
-    public void a(PacketDataSerializer arg0) throws IOException {
-        this.action = arg0.readInt();
-        this.names = arg0.e(32767);
-        this.playerNb = arg0.readInt();
-    }
-
-    @Override
-    public void a(PacketListener arg0) {
-    }
-
-    @Override
-    public void b(PacketDataSerializer arg0) throws IOException {
-        arg0.writeInt(this.action);
-        arg0.a(this.names);
-        arg0.writeInt(this.playerNb);
-    }
-
-    public int getDongeon() {
-        return this.action;
-    }
-
-    public String getPlayers() {
-        return this.names;
-    }
-
-    public int getPlayerNumber() {
-        return this.playerNb;
-    }
+	public PacketInDonjon(){}
+	public PacketInDonjon(int action, String names, int playerNb) {
+		this.action = action;
+		this.names = names;
+		this.playerNb = playerNb;
+	}
+	
+	@Override
+	public void a(PacketDataSerializer arg0) throws IOException {
+		action = arg0.readInt();
+		names = arg0.e(32767);
+		playerNb = arg0.readInt();
+		
+	}
+	@Override
+	public void a(PacketListener arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void b(PacketDataSerializer arg0) throws IOException {
+		arg0.writeInt(action);
+		arg0.a(names);
+		arg0.writeInt(playerNb);
+	}
+	public int getDongeon(){
+		return this.action;
+	}
+	
+	public String getPlayers(){
+		return names;
+	}
+	
+	public int getPlayerNumber(){
+		return playerNb;
+	}
 }
-
